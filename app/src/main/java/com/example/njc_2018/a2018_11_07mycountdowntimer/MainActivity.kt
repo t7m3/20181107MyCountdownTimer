@@ -1,11 +1,16 @@
 package com.example.njc_2018.a2018_11_07mycountdowntimer
 
+import android.media.AudioManager
+import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var soundPool: SoundPool
+    private  var soundResID = 0
 
     inner class MyCountDownTimer(millisInFuture: Long, countDownInterval: Long) :
         CountDownTimer(millisInFuture, countDownInterval) {
@@ -21,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         override fun onFinish() {
             //timerText.text = "0:00"
             timerText.text = "9:99"                                                         //デバッグ用
+            soundPool.play(soundResID, 1.0f, 100f, 0, 0, 1.0f)
         }
 
     }
@@ -50,5 +56,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        soundPool = SoundPool(2, AudioManager.STREAM_ALARM, 0)
+        soundResID = soundPool.load(this, R.raw.bellsound, 1)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        soundPool.release()
     }
 }
