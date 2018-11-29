@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //timerText.text = "3:00"
-        //val timer = MyCountDownTimer(3 * 60 * 1000, 100)
-        timerText.text = "0:20"                                                             //20秒　デバッグ用
-        val timer = MyCountDownTimer(2 * 10 * 1000, 100)     //20秒　デバッグ用
+        timerText.text = "3:00"
+        val timer = MyCountDownTimer(3 * 60 * 1000, 100)
+        //timerText.text = "0:20"                                                             //20秒　デバッグ用
+        //val timer = MyCountDownTimer(2 * 10 * 1000, 100)     //20秒　デバッグ用
 
         playStop.setOnClickListener {
             when (timer.isRunning){
