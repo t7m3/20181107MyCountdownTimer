@@ -22,4 +22,9 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" android:textSize="150sp"
             android:textColor="@color/colorAccent" tools:text="3:00" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/playStop"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/sym_def_app_icon"
+            tools:layout_editor_absoluteY="27dp" tools:layout_editor_absoluteX="179dp"
+            android:id="@+id/imageViewEnemy"/>
 </android.support.constraint.ConstraintLayout>
