@@ -4,6 +4,7 @@ import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.view.MotionEvent
@@ -72,12 +73,27 @@ class MainActivity : AppCompatActivity() {
         image[0] = findViewById(R.id.imageViewEnemy)  // <---成功したもの（配列で）
         image[0] = imageViewEnemy  // <---成功したもの（配列で）
         image[1] = imageViewEnemy1
+
+        // ImageViewのインスタンス生成
+        image[2] = ImageView(this);
+        image[2]?.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+        //image[2]?.visibility = View.VISIBLE
+
+        // ConstraintLayoutのid取得とImageViewの追加
+        // ・・・注意！！->activitymain.xmlにandroid:id="@+id/ConstraintLayout"の追加を忘れずに
+        // ・・・または、Design画面でIDにConstraintLayoutを入力する
+        val layout = findViewById<ConstraintLayout>(R.id.ConstraintLayout)
+        layout.addView(image[2])
+
+
         // imageViewEnemy の初期位置の設定
         //image?.x = 50F // <---成功したもの
         image[0]?.x = 50F  // <---成功したもの（配列で）
         imageViewEnemy.y = 100F
         image[1]?.x = 50F
         image[1]?.y = 200F
+        image[2]?.x = 200F
+        image[2]?.y = 200F
 
         // mageViewPlayer の初期位置の設定
         imageViewPlayer.x = 50F
