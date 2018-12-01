@@ -5,16 +5,19 @@ import android.media.SoundPool
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import android.util.DisplayMetrics
-
-
+import android.view.MotionEvent
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var soundPool: SoundPool
     private  var soundResID = 0
+
     private var dir = 1  //アニメーション用の変数の宣言
+    private var screenWidth = 0  //スクリーンの幅を格納する変数の宣言
+    private var screenHeight = 0   //スクリーンの高さ格納する変数の宣言
+
 
     inner class MyCountDownTimer(millisInFuture: Long, countDownInterval: Long) :
         CountDownTimer(millisInFuture, countDownInterval) {
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             val second = millisUntilFinished / 1000 % 60
             timerText.text = "%1d:%2$02d".format(minute, second)
 
-            enemyMove(5)
+            enemyMove(5)  //アニメーション
 
         }
 
@@ -42,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // スクリーンの幅と高さを取得する
+        val dMetrics = DisplayMetrics()  //DisplayMetrics のインスタンスを生成する
+        windowManager.defaultDisplay.getMetrics(dMetrics)  //スクリーンサイズを取得しているらしい
+        screenWidth = dMetrics.widthPixels  //スクリーンの幅を取得
+        screenHeight = dMetrics.heightPixels  //スクリーンの高さを取得
+
         timerText.text = "3:00"
         val timer = MyCountDownTimer(3 * 60 * 1000, 100)
         //timerText.text = "0:20"                                                             //20秒　デバッグ用
@@ -50,6 +59,10 @@ class MainActivity : AppCompatActivity() {
         // imageViewEnemy の初期位置の設定
         imageViewEnemy.x = 50F
         imageViewEnemy.y = 100F
+
+        // mageViewPlayer の初期位置の設定
+        imageViewPlayer.x = 50F
+        imageViewPlayer.y = screenHeight.toFloat() * 0.6F
 
         playStop.setOnClickListener {
             when (timer.isRunning){
@@ -83,17 +96,40 @@ class MainActivity : AppCompatActivity() {
     //アニメーション用のメソッド
     fun enemyMove(x: Int){
 
-        val dMetrics = DisplayMetrics()  //DisplayMetrics のインスタンスを生成する
-        windowManager.defaultDisplay.getMetrics(dMetrics)  //スクリーンサイズを取得しているらしい
-
-        val screenWidth = dMetrics.widthPixels  //スクリーンの幅を取得
-        val screenHeight = dMetrics.heightPixels  //スクリーンの高さを取得
-
         imageViewEnemy.x = imageViewEnemy.x + x * dir
 
         if(imageViewEnemy.x < 0 ||  screenWidth - imageViewEnemy.width < imageViewEnemy.x ){
             dir = dir * -1; //移動の左右の向きを反転する
         }
+
+    }
+
+    //画面タッチのメソッドの定義
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+
+        val x = event.x                //タッチした場所のＸ座標
+        val y = event.y                //タッチした場所のＹ座標
+
+        textView.text = "X座標：$x　Y座標：$y"
+
+        when (event.action) {
+
+            MotionEvent.ACTION_DOWN -> {
+                textView.append("　ACTION_DOWN")
+                imageViewPlayer.setX(x)
+            }
+
+            MotionEvent.ACTION_UP -> textView.append("　ACTION_UP")
+
+            MotionEvent.ACTION_MOVE -> {
+                textView.append("　ACTION_MOVE")
+                imageViewPlayer.setX(x)
+            }
+
+            MotionEvent.ACTION_CANCEL -> textView.append("　ACTION_CANCEL")
+        }
+
+        return true
 
     }
 }

@@ -27,4 +27,19 @@
             android:layout_height="wrap_content" app:srcCompat="@android:drawable/sym_def_app_icon"
             tools:layout_editor_absoluteY="27dp" tools:layout_editor_absoluteX="179dp"
             android:id="@+id/imageViewEnemy"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/btn_star_big_on"
+            tools:layout_editor_absoluteY="361dp" tools:layout_editor_absoluteX="48dp"
+            android:id="@+id/imageViewPlayer"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/timerText" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toEndOf="@+id/playStop" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
 </android.support.constraint.ConstraintLayout>
