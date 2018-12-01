@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.view.MotionEvent
+import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,16 @@ class MainActivity : AppCompatActivity() {
     private var dir = 1  //アニメーション用の変数の宣言
     private var screenWidth = 0  //スクリーンの幅を格納する変数の宣言
     private var screenHeight = 0   //スクリーンの高さ格納する変数の宣言
+
+    //val image: ImageView = imageViewEnemy
+    //var image: ImageView = imageViewEnemy
+    //var image: ImageView = findViewById(R.id.imageViewEnemy)
+    //var image: ImageView? = null  // <---成功したもの
+
+    //var image = arrayOfNulls<ImageView>(5)  // <---成功したもの（配列で）
+    val image = arrayOfNulls<ImageView>(5)  // <---成功したもの（配列で）
+    //val buttons = Array(3, { arrayOfNulls<ImageView>(5)})
+
 
 
     inner class MyCountDownTimer(millisInFuture: Long, countDownInterval: Long) :
@@ -56,9 +67,17 @@ class MainActivity : AppCompatActivity() {
         //timerText.text = "0:20"                                                             //20秒　デバッグ用
         //val timer = MyCountDownTimer(2 * 10 * 1000, 100)     //20秒　デバッグ用
 
+
+        //image = findViewById(R.id.imageViewEnemy) // <---成功したもの
+        image[0] = findViewById(R.id.imageViewEnemy)  // <---成功したもの（配列で）
+        image[0] = imageViewEnemy  // <---成功したもの（配列で）
+        image[1] = imageViewEnemy1
         // imageViewEnemy の初期位置の設定
-        imageViewEnemy.x = 50F
+        //image?.x = 50F // <---成功したもの
+        image[0]?.x = 50F  // <---成功したもの（配列で）
         imageViewEnemy.y = 100F
+        image[1]?.x = 50F
+        image[1]?.y = 200F
 
         // mageViewPlayer の初期位置の設定
         imageViewPlayer.x = 50F

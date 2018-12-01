@@ -42,4 +42,9 @@
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             app:layout_constraintStart_toEndOf="@+id/playStop" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@mipmap/ic_launcher_round"
+            tools:layout_editor_absoluteY="44dp" tools:layout_editor_absoluteX="61dp"
+            android:id="@+id/imageViewEnemy1"/>
 </android.support.constraint.ConstraintLayout>
